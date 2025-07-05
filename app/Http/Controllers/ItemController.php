@@ -24,7 +24,12 @@ class ItemController extends Controller
             'name' => 'required|string',
             'stock' => 'required|integer',
             'price' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $validated['image'] = $imagePath;
+        }
 
         Item::create($validated);
 

@@ -31,6 +31,7 @@
         <thead class="table-dark">
             <tr>
                 <th>No</th>
+                <th>Gambar</th>
                 <th>Kode Barang</th>
                 <th>Nama</th>
                 <th>Stok</th>
@@ -43,6 +44,13 @@
             @forelse($items as $index => $item)
                 <tr>
                     <td>{{ $index + 1 }}</td>
+                    <td>
+                        @if($item->image)
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="Gambar" width="60" height="60" style="object-fit: cover; border-radius: 6px;">
+                        @else
+                            <span class="text-muted">Tidak ada</span>
+                        @endif
+                    </td>
                     <td>{{ $item->kode_barang }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->stock }}</td>
@@ -58,7 +66,7 @@
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="6" class="text-center">Tidak ada barang.</td></tr>
+                <tr><td colspan="8" class="text-center">Tidak ada barang.</td></tr>
             @endforelse
         </tbody>
     </table>
